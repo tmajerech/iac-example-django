@@ -29,8 +29,7 @@ SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = ["*"]  # TODO
 
 LOGGING = {
     'version': 1,
@@ -61,7 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
 
-    #custom
+    # custom
     "storages"
 ]
 
@@ -199,9 +198,7 @@ else:
         "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     ]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
