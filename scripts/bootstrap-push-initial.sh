@@ -8,14 +8,14 @@
 
 PROFILE=${1:-default}
 TAG=${2:-initial}
-REPO="prod-ecrstack-djangoecrrepo6870deb4-x0i1kcvuhyws"
+STAGE=${3:-prod}
 AWS_REGION="eu-central-1"
 
 # Get AWS account ID using specified profile
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text --profile "$PROFILE")
 
 # Full ECR repo URI
-ECR_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPO"
+ECR_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$STAGE-django_images"
 
 echo "Building Docker image for $REPO:$TAG"
 docker build --platform linux/amd64 -t $REPO .
