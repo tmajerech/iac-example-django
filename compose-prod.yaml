@@ -8,9 +8,10 @@ services:
         - DEV=true
     ports:
       - "8000:8000"
+    restart: always
     volumes:
       - ./app:/app
-      - dev-static-data:/vol/web
+      - static-data:/vol/web
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
@@ -22,12 +23,24 @@ services:
 
   db:
     image: postgres:17-alpine
+    restart: always
     volumes:
       - dev-db-data:/var/lib/postgresql/data
     env_file:
       - .env-docker
 
+  proxy:
+    build:
+      context: ./proxy
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "80:8000"
+    volumes:
+      - static-data:/vol/static
+
 
 volumes:
   dev-db-data:
-  dev-static-data:
+  static-data:
