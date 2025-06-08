@@ -9,10 +9,10 @@ python manage.py migrate
 #uwsgi --socket :9000 --workers 4 --master --enable-threads --module app.wsgi
 
 gunicorn \
-    --bind 0.0.0.0:8000 \
+    --bind 0.0.0.0:9000 \
     --workers 2 \
     --worker-class eventlet \
     --log-level DEBUG \
     --access-logfile "-" \
     --error-logfile "-" \
-    dockerapp.wsgi
+    app.wsgi
